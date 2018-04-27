@@ -1,0 +1,47 @@
+ext {
+
+    android = [
+
+            compileSdkVersion: 27,
+            applicationId    : "com.niles.owlapp",
+            minSdkVersion    : 14,
+            targetSdkVersion : 27,
+            versionName      : APP_VERSION,
+            versionCode      : getAppCode(APP_VERSION)
+
+    ]
+
+    dependencies = [
+
+            // Android Support Version
+            support_version: "27.1.1",
+
+            // Test
+            junit          : "junit:junit:4.12"
+
+    ]
+
+    sign = [
+            storeFile    : "../sign",
+            storePassword: "Fsd34Q@#rdfa564dssa",
+            keyAlias     : "Gdfsda",
+            keyPassword  : "Fd#12rF@\$#fsdFGVWe"
+    ]
+
+    apk = [
+            buildTime: getDate()
+    ]
+
+}
+
+
+static def getAppCode(versionName) {
+    def split = versionName.split("\\.")
+    return Integer.parseInt(split[0]) * 10000 + Integer.parseInt(split[1]) * 100 + Integer.parseInt(split[2])
+}
+
+static def getDate() {
+    def date = new Date()
+    def formattedDate = date.format('yyyy-MM-dd-HH-mm')
+    return formattedDate
+}
