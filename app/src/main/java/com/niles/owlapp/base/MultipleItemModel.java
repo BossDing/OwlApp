@@ -1,5 +1,7 @@
 package com.niles.owlapp.base;
 
+import com.chad.library.adapter.base.entity.MultiItemEntity;
+
 import java.util.HashMap;
 
 /**
@@ -7,17 +9,13 @@ import java.util.HashMap;
  * Date 2018/5/4
  * Email niulinguo@163.com
  */
-public class MultipleItemModel {
+public class MultipleItemModel implements MultiItemEntity {
 
-    private final int mType;
+    private final int mItemType;
     private HashMap<String, Object> mParams;
 
     public MultipleItemModel(int viewType) {
-        mType = viewType;
-    }
-
-    public int getViewType() {
-        return mType;
+        mItemType = viewType;
     }
 
     public int getInteger(String key) {
@@ -42,5 +40,10 @@ public class MultipleItemModel {
             return (T) mParams.get(key);
         }
         return defaultValue;
+    }
+
+    @Override
+    public int getItemType() {
+        return mItemType;
     }
 }

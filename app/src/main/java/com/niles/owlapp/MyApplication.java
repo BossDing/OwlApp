@@ -1,9 +1,11 @@
 package com.niles.owlapp;
 
 import android.app.Application;
+import android.content.Context;
 
 import com.niles.owl.OwlApp;
 import com.squareup.leakcanary.LeakCanary;
+import com.squareup.leakcanary.RefWatcher;
 
 /**
  * Created by Negro
@@ -11,6 +13,12 @@ import com.squareup.leakcanary.LeakCanary;
  * Email niulinguo@163.com
  */
 public class MyApplication extends Application {
+
+    private RefWatcher mRefWatcher;
+
+    public static RefWatcher getRefWatcher(Context context) {
+        return ((MyApplication) context.getApplicationContext()).mRefWatcher;
+    }
 
     @Override
     public void onCreate() {
@@ -20,7 +28,7 @@ public class MyApplication extends Application {
             return;
         }
 
-        LeakCanary.install(this);
+        mRefWatcher = LeakCanary.install(this);
         OwlApp.init(BuildConfig.DEBUG, this);
     }
 }

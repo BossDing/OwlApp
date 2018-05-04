@@ -8,10 +8,9 @@ import android.support.v7.widget.RecyclerView;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.provider.BaseItemProvider;
 import com.niles.owl.delegate.RecyclerViewDelegate;
-import com.niles.owlapp.base.CountDownProvider;
-import com.niles.owlapp.base.ListAdapter;
 import com.niles.owlapp.base.MultipleItemModel;
-import com.niles.owlapp.base.ViewType;
+import com.niles.owlapp.common.ListAdapter;
+import com.niles.owlapp.common.ViewType;
 
 import java.util.Arrays;
 import java.util.List;
@@ -30,7 +29,7 @@ public class ListDelegate extends RecyclerViewDelegate {
             final List<MultipleItemModel> data = mListAdapter.getData();
             for (int i = 0; i < data.size(); i++) {
                 final MultipleItemModel model = data.get(i);
-                if (model.getViewType() == ViewType.TYPE_COUNT_DOWN) {
+                if (model.getItemType() == ViewType.TYPE_COUNT_DOWN) {
                     final BaseItemProvider baseItemProvider = mListAdapter.getBaseItemProvider(model);
                     final BaseViewHolder baseViewHolder = (BaseViewHolder) mRecyclerView.findViewHolderForAdapterPosition(i);
                     // 更新 Model
@@ -53,6 +52,12 @@ public class ListDelegate extends RecyclerViewDelegate {
     protected RecyclerView.Adapter createAdapter() {
         mListAdapter = new ListAdapter(null);
         return mListAdapter;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mCountDownTimer.cancel();
     }
 
     @Override

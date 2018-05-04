@@ -1,10 +1,10 @@
-package com.niles.owlapp.base;
+package com.niles.owlapp.common;
 
-import com.blankj.utilcode.util.TimeUtils;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.annotation.ItemProviderTag;
 import com.chad.library.adapter.base.provider.BaseItemProvider;
 import com.niles.owlapp.R;
+import com.niles.owlapp.base.MultipleItemModel;
 
 /**
  * Created by Negro
@@ -12,13 +12,12 @@ import com.niles.owlapp.R;
  * Email niulinguo@163.com
  */
 @ItemProviderTag(
-        viewType = ViewType.TYPE_COUNT_DOWN,
+        viewType = ViewType.TYPE_TEXT,
         layout = R.layout.item_text
 )
-public class CountDownProvider extends BaseItemProvider<MultipleItemModel, BaseViewHolder> implements SubRefreshProvider<MultipleItemModel, BaseViewHolder> {
+public class TextProvider extends BaseItemProvider<MultipleItemModel, BaseViewHolder> {
     @Override
     public void convert(BaseViewHolder helper, MultipleItemModel data, int position) {
-        helper.setText(R.id.tv_item_text, TimeUtils.millis2String(data.getLong("time")));
     }
 
     @Override
@@ -29,10 +28,5 @@ public class CountDownProvider extends BaseItemProvider<MultipleItemModel, BaseV
     @Override
     public boolean onLongClick(BaseViewHolder helper, MultipleItemModel data, int position) {
         return false;
-    }
-
-    @Override
-    public void onSubRefresh(BaseViewHolder helper, MultipleItemModel data, int position) {
-        helper.setText(R.id.tv_item_text, TimeUtils.millis2String(data.getLong("time")));
     }
 }

@@ -1,10 +1,12 @@
-package com.niles.owlapp.base;
+package com.niles.owlapp.common;
 
 import android.support.annotation.Nullable;
 
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.chad.library.adapter.base.MultipleItemRvAdapter;
 import com.chad.library.adapter.base.provider.BaseItemProvider;
+import com.niles.owlapp.countdown.CountDownProvider;
+import com.niles.owlapp.base.MultipleItemModel;
 
 import java.util.List;
 
@@ -21,7 +23,7 @@ public class ListAdapter extends MultipleItemRvAdapter<MultipleItemModel, BaseVi
 
     @Override
     protected int getViewType(MultipleItemModel model) {
-        return model.getViewType();
+        return model.getItemType();
     }
 
     @Override
@@ -35,6 +37,6 @@ public class ListAdapter extends MultipleItemRvAdapter<MultipleItemModel, BaseVi
     }
 
     public BaseItemProvider getBaseItemProvider(MultipleItemModel model) {
-        return getBaseItemProvider(model.getViewType());
+        return getBaseItemProvider(model.getItemType());
     }
 }

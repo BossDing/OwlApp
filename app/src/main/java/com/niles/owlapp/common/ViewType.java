@@ -1,4 +1,4 @@
-package com.niles.owlapp.base;
+package com.niles.owlapp.common;
 
 /**
  * Created by Negro
