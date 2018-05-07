@@ -19,7 +19,8 @@ import me.yokeyword.fragmentation.SupportFragment;
  */
 public abstract class OwlDelegate extends SupportFragment {
 
-    @SuppressWarnings("NullableProblems")
+    protected final String TAG = getClass().getSimpleName();
+
     @NonNull
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -42,6 +43,7 @@ public abstract class OwlDelegate extends SupportFragment {
     @Nullable
     protected abstract Object getRootView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState);
 
+    @NonNull
     private View createEmptyRootView() {
         final TextView textView = new TextView(getContext());
         textView.setText(R.string.empty);

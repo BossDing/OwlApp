@@ -32,14 +32,14 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     // Support
-    implementation "com.android.support:support-v13:${rootProject.ext.dependencies.support_version}"
+    api "com.android.support:support-v13:${rootProject.ext.dependencies.support_version}"
     implementation "com.android.support:appcompat-v7:${rootProject.ext.dependencies.support_version}"
     implementation "com.android.support:recyclerview-v7:${rootProject.ext.dependencies.support_version}"
     api "com.android.support:design:${rootProject.ext.dependencies.support_version}"
     implementation "com.android.support:support-v4:${rootProject.ext.dependencies.support_version}"
 
     // Logcat
-    implementation 'com.jakewharton.timber:timber:4.7.0'
+    api 'com.jakewharton.timber:timber:4.7.0'
 
     // Utils
     api 'com.blankj:utilcode:1.14.3'
@@ -71,11 +71,10 @@ dependencies {
     // Event
     implementation 'org.greenrobot:eventbus:3.1.1'
 
-    // Permission
-    implementation("com.github.hotchemi:permissionsdispatcher:3.2.0")
-    annotationProcessor "com.github.hotchemi:permissionsdispatcher-processor:3.2.0"
-
     // Tab
 //    api 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
     api 'devlight.io:navigationtabbar:1.2.5'
+
+    // Barcode
+    api 'me.dm7.barcodescanner:zbar:1.9.8'
 }
