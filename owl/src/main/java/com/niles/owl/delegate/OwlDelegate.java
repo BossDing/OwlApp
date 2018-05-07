@@ -19,7 +19,8 @@ import me.yokeyword.fragmentation.SupportFragment;
  */
 public abstract class OwlDelegate extends SupportFragment {
 
-    @Nullable
+    @SuppressWarnings("NullableProblems")
+    @NonNull
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
