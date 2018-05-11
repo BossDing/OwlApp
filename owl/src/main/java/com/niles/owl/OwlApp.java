@@ -5,6 +5,8 @@ import android.support.annotation.NonNull;
 
 import com.blankj.utilcode.util.Utils;
 import com.niles.owl.http.OkHttpInitializer;
+import com.orhanobut.logger.AndroidLogAdapter;
+import com.orhanobut.logger.Logger;
 
 import me.yokeyword.fragmentation.Fragmentation;
 import me.yokeyword.fragmentation.helper.ExceptionHandler;
@@ -35,19 +37,20 @@ public final class OwlApp {
     }
 
     @NonNull
-    public static Application app() {
+    private static Application app() {
         if (sApp == null) {
             throw new RuntimeException("please init first");
         }
         return sApp;
     }
 
-    public static boolean isDebug() {
+    private static boolean isDebug() {
         return sDebug;
     }
 
     private static void initLogcat() {
         Timber.plant(new Timber.DebugTree());
+        Logger.addLogAdapter(new AndroidLogAdapter());
     }
 
     private static void initUtils() {

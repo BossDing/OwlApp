@@ -8,8 +8,8 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.niles.owl.delegate.OwlDelegate;
 import com.niles.owlapp.R;
 import com.niles.owlapp.databinding.DelegateBottomTabLayoutBinding;
@@ -29,7 +29,7 @@ public class BottomTabDelegate extends OwlDelegate {
 
     @Nullable
     @Override
-    protected Object getRootView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    protected Object createRootView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return R.layout.delegate_bottom_tab_layout;
     }
 
@@ -38,32 +38,31 @@ public class BottomTabDelegate extends OwlDelegate {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = super.onCreateView(inflater, container, savedInstanceState);
         mLayoutBinding = DataBindingUtil.bind(view);
+        initTabs();
         return view;
     }
 
-    @Override
-    public void onLazyInitView(@Nullable Bundle savedInstanceState) {
-        super.onLazyInitView(savedInstanceState);
+    private void initTabs() {
         final NavigationTabBar navigationTabBar = mLayoutBinding.navigationTabBar;
         final ArrayList<NavigationTabBar.Model> models = new ArrayList<>();
-        models.add(new NavigationTabBar.Model.Builder(getResources().getDrawable(R.drawable.ic_launcher_background), Color.BLUE)
-                .selectedIcon(getResources().getDrawable(R.drawable.ic_launcher_foreground))
+        models.add(new NavigationTabBar.Model.Builder(getResources().getDrawable(R.mipmap.ic_launcher), Color.BLUE)
+                .selectedIcon(getResources().getDrawable(R.mipmap.ic_launcher_round))
                 .title("首页")
                 .build()
         );
-        models.add(new NavigationTabBar.Model.Builder(getResources().getDrawable(R.drawable.ic_launcher_background), Color.BLUE)
-                .selectedIcon(getResources().getDrawable(R.drawable.ic_launcher_foreground))
+        models.add(new NavigationTabBar.Model.Builder(getResources().getDrawable(R.mipmap.ic_launcher), Color.BLUE)
+                .selectedIcon(getResources().getDrawable(R.mipmap.ic_launcher_round))
                 .title("分类")
                 .build()
         );
-        models.add(new NavigationTabBar.Model.Builder(getResources().getDrawable(R.drawable.ic_launcher_background), Color.BLUE)
-                .selectedIcon(getResources().getDrawable(R.drawable.ic_launcher_foreground))
+        models.add(new NavigationTabBar.Model.Builder(getResources().getDrawable(R.mipmap.ic_launcher), Color.BLUE)
+                .selectedIcon(getResources().getDrawable(R.mipmap.ic_launcher_round))
                 .title("购物车")
                 .badgeTitle("99")
                 .build()
         );
-        models.add(new NavigationTabBar.Model.Builder(getResources().getDrawable(R.drawable.ic_launcher_background), Color.BLUE)
-                .selectedIcon(getResources().getDrawable(R.drawable.ic_launcher_foreground))
+        models.add(new NavigationTabBar.Model.Builder(getResources().getDrawable(R.mipmap.ic_launcher), Color.BLUE)
+                .selectedIcon(getResources().getDrawable(R.mipmap.ic_launcher_round))
                 .title("我的")
                 .build()
         );
@@ -82,9 +81,9 @@ public class BottomTabDelegate extends OwlDelegate {
         navigationTabBar.setIsSwiped(true);
         navigationTabBar.setIsScaled(true);
         navigationTabBar.setIsTinted(true);
-        navigationTabBar.setModelIndex(0);
         navigationTabBar.setAnimationDuration(0);
 
+        navigationTabBar.setModelIndex(0);
         models.get(2).showBadge();
 
         navigationTabBar.setOnTabBarSelectedIndexListener(new NavigationTabBar.OnTabBarSelectedIndexListener() {
@@ -95,7 +94,7 @@ public class BottomTabDelegate extends OwlDelegate {
 
             @Override
             public void onEndTabSelected(NavigationTabBar.Model model, int index) {
-                Toast.makeText(_mActivity, model.getTitle(), Toast.LENGTH_SHORT).show();
+                ToastUtils.showShort(model.getTitle());
             }
         });
     }

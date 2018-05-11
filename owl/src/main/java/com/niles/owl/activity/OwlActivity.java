@@ -25,10 +25,7 @@ public abstract class OwlActivity extends SupportActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(createContentView());
-
-        if (getTopFragment() == null) {
-            loadRootFragment(ID_CONTENT_VIEW, getRootDelegate());
-        }
+        loadRootFragment(ID_CONTENT_VIEW, getRootDelegate());
     }
 
     @NonNull

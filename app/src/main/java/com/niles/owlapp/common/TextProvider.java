@@ -1,32 +1,22 @@
 package com.niles.owlapp.common;
 
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.chad.library.adapter.base.annotation.ItemProviderTag;
-import com.chad.library.adapter.base.provider.BaseItemProvider;
+import com.niles.owl.list.OwlBaseItemProvider;
+import com.niles.owl.list.OwlItemModel;
 import com.niles.owlapp.R;
-import com.niles.owlapp.base.MultipleItemModel;
 
 /**
  * Created by Negro
  * Date 2018/5/2
  * Email niulinguo@163.com
  */
-@ItemProviderTag(
-        viewType = ViewType.TYPE_TEXT,
-        layout = R.layout.item_text
-)
-public class TextProvider extends BaseItemProvider<MultipleItemModel, BaseViewHolder> {
+public class TextProvider extends OwlBaseItemProvider {
     @Override
-    public void convert(BaseViewHolder helper, MultipleItemModel data, int position) {
+    public int layout() {
+        return R.layout.item_text;
     }
 
     @Override
-    public void onClick(BaseViewHolder helper, MultipleItemModel data, int position) {
-
-    }
-
-    @Override
-    public boolean onLongClick(BaseViewHolder helper, MultipleItemModel data, int position) {
-        return false;
+    public void convert(BaseViewHolder helper, OwlItemModel data, int position) {
     }
 }

@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Context;
 
 import com.niles.owl.OwlApp;
+import com.squareup.leakcanary.AndroidExcludedRefs;
+import com.squareup.leakcanary.DisplayLeakService;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 
@@ -28,7 +30,12 @@ public class MyApplication extends Application {
             return;
         }
 
-        mRefWatcher = LeakCanary.install(this);
+        mRefWatcher = LeakCanary
+                .refWatcher(this)
+                .listenerServiceClass(DisplayLeakService.class)
+                .excludedRefs(AndroidExcludedRefs.createAndroidDefaults().build())
+                .buildAndInstall();
+
         OwlApp.init(BuildConfig.DEBUG, this);
     }
 }

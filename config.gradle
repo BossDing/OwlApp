@@ -3,9 +3,11 @@ ext {
     android = [
 
             compileSdkVersion: 'android-P',
+//            compileSdkVersion: 27,
             applicationId    : "com.niles.owlapp",
             minSdkVersion    : 14,
             targetSdkVersion : 28,
+//            targetSdkVersion : 27,
             versionName      : APP_VERSION,
             versionCode      : getAppCode(APP_VERSION)
 

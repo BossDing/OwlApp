@@ -21,11 +21,13 @@ public abstract class OwlDelegate extends SupportFragment {
 
     protected final String TAG = getClass().getSimpleName();
 
+    private View mRootView;
+
     @NonNull
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        final Object rootObj = getRootView(inflater, container, savedInstanceState);
+        final Object rootObj = createRootView(inflater, container, savedInstanceState);
         final View rootView;
         if (rootObj == null) {
             rootView = createEmptyRootView();
@@ -37,16 +39,21 @@ public abstract class OwlDelegate extends SupportFragment {
             throw new RuntimeException("un support rootView " + rootObj.getClass().getName());
         }
 
-        return rootView;
+        return mRootView = rootView;
     }
 
     @Nullable
-    protected abstract Object getRootView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState);
+    protected abstract Object createRootView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState);
 
     @NonNull
     private View createEmptyRootView() {
         final TextView textView = new TextView(getContext());
         textView.setText(R.string.empty);
         return textView;
+    }
+
+    @Nullable
+    public View getRootView() {
+        return mRootView;
     }
 }

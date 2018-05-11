@@ -2,11 +2,10 @@ package com.niles.owlapp.common;
 
 import android.support.annotation.Nullable;
 
-import com.chad.library.adapter.base.BaseViewHolder;
-import com.chad.library.adapter.base.MultipleItemRvAdapter;
-import com.chad.library.adapter.base.provider.BaseItemProvider;
+import com.niles.owl.list.OwlItemModel;
+import com.niles.owl.list.OwlListAdapter;
 import com.niles.owlapp.countdown.CountDownProvider;
-import com.niles.owlapp.base.MultipleItemModel;
+import com.niles.owlapp.main.MainProvider;
 
 import java.util.List;
 
@@ -15,28 +14,16 @@ import java.util.List;
  * Date 2018/5/2
  * Email niulinguo@163.com
  */
-public class ListAdapter extends MultipleItemRvAdapter<MultipleItemModel, BaseViewHolder> {
-    public ListAdapter(@Nullable List<MultipleItemModel> data) {
-        super(data);
-        finishInitialize();
-    }
+public final class ListAdapter extends OwlListAdapter {
 
-    @Override
-    protected int getViewType(MultipleItemModel model) {
-        return model.getItemType();
+    public ListAdapter(@Nullable List<OwlItemModel> data) {
+        super(data);
     }
 
     @Override
     public void registerItemProvider() {
         mProviderDelegate.registerProvider(new CountDownProvider());
         mProviderDelegate.registerProvider(new TextProvider());
-    }
-
-    private BaseItemProvider getBaseItemProvider(int viewType) {
-        return mProviderDelegate.getItemProviders().get(viewType);
-    }
-
-    public BaseItemProvider getBaseItemProvider(MultipleItemModel model) {
-        return getBaseItemProvider(model.getItemType());
+        mProviderDelegate.registerProvider(new MainProvider());
     }
 }

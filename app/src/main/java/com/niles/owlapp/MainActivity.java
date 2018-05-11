@@ -7,7 +7,7 @@ import android.support.annotation.Nullable;
 import com.jaeger.library.StatusBarUtil;
 import com.niles.owl.activity.OwlActivity;
 import com.niles.owl.delegate.OwlDelegate;
-import com.niles.owlapp.scan.ScanPermissionDelegate;
+import com.niles.owlapp.main.MainDelegate;
 
 public class MainActivity extends OwlActivity {
 
@@ -20,6 +20,6 @@ public class MainActivity extends OwlActivity {
     @NonNull
     @Override
     protected OwlDelegate getRootDelegate() {
-        return new ScanPermissionDelegate();
+        return new MainDelegate();
     }
 }

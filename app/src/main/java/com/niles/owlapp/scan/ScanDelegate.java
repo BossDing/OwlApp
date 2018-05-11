@@ -23,7 +23,7 @@ public class ScanDelegate extends OwlDelegate implements ZBarScannerView.ResultH
 
     @Nullable
     @Override
-    protected Object getRootView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    protected Object createRootView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mScannerView = new ZBarScannerView(getContext());
         return mScannerView;
     }

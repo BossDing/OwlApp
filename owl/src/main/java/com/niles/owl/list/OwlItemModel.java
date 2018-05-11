@@ -1,4 +1,4 @@
-package com.niles.owlapp.base;
+package com.niles.owl.list;
 
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 
@@ -9,13 +9,19 @@ import java.util.HashMap;
  * Date 2018/5/4
  * Email niulinguo@163.com
  */
-public class MultipleItemModel implements MultiItemEntity {
+public class OwlItemModel implements MultiItemEntity {
 
     private final int mItemType;
+    private final Class<? extends OwlBaseItemProvider> mProviderClass;
     private HashMap<String, Object> mParams;
 
-    public MultipleItemModel(int viewType) {
-        mItemType = viewType;
+    private OwlItemModel(Class<? extends OwlBaseItemProvider> providerClass) {
+        mProviderClass = providerClass;
+        mItemType = ViewTypeCreator.getId(providerClass);
+    }
+
+    public static OwlItemModel create(Class<? extends OwlBaseItemProvider> providerClass) {
+        return new OwlItemModel(providerClass);
     }
 
     public int getInteger(String key) {
@@ -26,7 +32,11 @@ public class MultipleItemModel implements MultiItemEntity {
         return get(key, 0L);
     }
 
-    public MultipleItemModel put(String key, Object value) {
+    public String getString(String key) {
+        return get(key, "");
+    }
+
+    public OwlItemModel put(String key, Object value) {
         if (mParams == null) {
             mParams = new HashMap<>();
         }
@@ -43,7 +53,11 @@ public class MultipleItemModel implements MultiItemEntity {
     }
 
     @Override
-    public int getItemType() {
+    public final int getItemType() {
         return mItemType;
+    }
+
+    public final Class<? extends OwlBaseItemProvider> getProviderClass() {
+        return mProviderClass;
     }
 }

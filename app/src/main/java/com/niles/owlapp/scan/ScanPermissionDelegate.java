@@ -9,8 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.niles.owl.delegate.OwlDelegate;
 
 import permissions.dispatcher.NeedsPermission;
@@ -27,24 +27,33 @@ import permissions.dispatcher.RuntimePermissions;
  */
 @RuntimePermissions
 public class ScanPermissionDelegate extends OwlDelegate {
+
+    private boolean mHasPermission = true;
+
     @Nullable
     @Override
-    protected Object getRootView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    protected Object createRootView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final TextView textView = new TextView(getContext());
         textView.setText("请授权");
         textView.setOnClickListener(view -> ScanPermissionDelegatePermissionsDispatcher.showScanDelegateWithPermissionCheck(ScanPermissionDelegate.this));
         return textView;
     }
 
-    @NonNull
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         ScanPermissionDelegatePermissionsDispatcher.showScanDelegateWithPermissionCheck(this);
-        return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        onHasPermission(mHasPermission);
     }
 
     @NeedsPermission(Manifest.permission.CAMERA)
     void showScanDelegate() {
+        onHasPermission(true);
         startWithPop(new ScanDelegate());
     }
 
@@ -59,17 +68,27 @@ public class ScanPermissionDelegate extends OwlDelegate {
 
     @OnPermissionDenied(Manifest.permission.CAMERA)
     void showDeniedForCamera() {
-        Toast.makeText(getContext(), "相机不可用", Toast.LENGTH_SHORT).show();
+        ToastUtils.showShort("相机不可用");
+        onHasPermission(false);
     }
 
     @OnNeverAskAgain(Manifest.permission.CAMERA)
     void showNeverAskForCamera() {
-        Toast.makeText(getContext(), "相机被禁用", Toast.LENGTH_SHORT).show();
+        ToastUtils.showShort("相机被禁用");
+        onHasPermission(false);
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         ScanPermissionDelegatePermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
+    }
+
+    private void onHasPermission(boolean has) {
+        mHasPermission = has;
+        final View rootView = getRootView();
+        if (rootView != null) {
+            rootView.setVisibility(has ? View.GONE : View.VISIBLE);
+        }
     }
 }
