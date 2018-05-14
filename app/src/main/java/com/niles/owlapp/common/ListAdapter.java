@@ -4,6 +4,7 @@ import android.support.annotation.Nullable;
 
 import com.niles.owl.list.OwlItemModel;
 import com.niles.owl.list.OwlListAdapter;
+import com.niles.owlapp.banner.BannerProvider;
 import com.niles.owlapp.countdown.CountDownProvider;
 import com.niles.owlapp.main.MainProvider;
 
@@ -25,5 +26,6 @@ public final class ListAdapter extends OwlListAdapter {
         mProviderDelegate.registerProvider(new CountDownProvider());
         mProviderDelegate.registerProvider(new TextProvider());
         mProviderDelegate.registerProvider(new MainProvider());
+        mProviderDelegate.registerProvider(new BannerProvider());
     }
 }

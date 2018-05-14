@@ -36,6 +36,14 @@ public class OwlItemModel implements MultiItemEntity {
         return get(key, "");
     }
 
+    public String[] getStringArray(String key) {
+        return get(key, new String[]{});
+    }
+
+    public boolean getBoolean(String key) {
+        return get(key, false);
+    }
+
     public OwlItemModel put(String key, Object value) {
         if (mParams == null) {
             mParams = new HashMap<>();

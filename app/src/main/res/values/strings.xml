@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">OwlApp</string>
+    <string name="desc_image">图片</string>
 </resources>

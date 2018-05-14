@@ -10,6 +10,7 @@ import com.niles.owl.list.OnListItemClicked;
 import com.niles.owl.list.OwlBaseItemProvider;
 import com.niles.owl.list.OwlItemModel;
 import com.niles.owl.list.OwlListAdapter;
+import com.niles.owlapp.banner.BannerDelegate;
 import com.niles.owlapp.common.ListAdapter;
 import com.niles.owlapp.countdown.CountDownListDelegate;
 import com.niles.owlapp.scan.ScanPermissionDelegate;
@@ -35,7 +36,8 @@ public class MainDelegate extends OwlListDelegate implements OnListItemClicked {
         getAdapter().addData(Arrays.asList(
                 OwlItemModel.create(MainProvider.class).put("text", "倒计时").put("listener", this),
                 OwlItemModel.create(MainProvider.class).put("text", "底部菜单").put("listener", this),
-                OwlItemModel.create(MainProvider.class).put("text", "扫一扫").put("listener", this)
+                OwlItemModel.create(MainProvider.class).put("text", "扫一扫").put("listener", this),
+                OwlItemModel.create(MainProvider.class).put("text", "轮播图").put("listener", this)
         ));
     }
 
@@ -52,6 +54,10 @@ public class MainDelegate extends OwlListDelegate implements OnListItemClicked {
             }
             case "扫一扫": {
                 start(new ScanPermissionDelegate());
+                break;
+            }
+            case "轮播图": {
+                start(new BannerDelegate());
                 break;
             }
         }

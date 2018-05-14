@@ -18,5 +18,6 @@ public class TextProvider extends OwlBaseItemProvider {
 
     @Override
     public void convert(BaseViewHolder helper, OwlItemModel data, int position) {
+        helper.setText(R.id.tv_item_text, data.getString("text"));
     }
 }

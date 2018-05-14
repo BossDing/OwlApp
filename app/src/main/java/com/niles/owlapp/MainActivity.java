@@ -1,5 +1,6 @@
 package com.niles.owlapp;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,7 +15,7 @@ public class MainActivity extends OwlActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        StatusBarUtil.setTranslucent(this);
+        StatusBarUtil.setColor(this, Color.BLACK);
     }
 
     @NonNull
